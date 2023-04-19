@@ -3,7 +3,7 @@
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'penyewaan';
+$database = 'db_futsal';
 
 $koneksi = mysqli_connect($host, $username, $password, $database);
 
@@ -18,7 +18,6 @@ $koneksi = mysqli_connect($host, $username, $password, $database);
 
 // Fungsi Create
 if (isset($_POST['submit'])) {
-    $id =  $_POST['id'];
     $nama = $_POST['nama'];
     $telefon = $_POST['telefon'];
     $tgl_booking = $_POST['tgl_booking'];
@@ -30,7 +29,8 @@ if (isset($_POST['submit'])) {
     $depo = $_POST['depo'];
     $keterangan = $_POST['keterangan'];
 
-    $query = "INSERT INTO `futsal` (`id`, `nama`, `telefon`, `tgl_booking`, `jam_booking`, `durasi_sewa`, `jml_pemain`, `no_lap`, `harga`, `depo`, `keterangan` ) VALUES ('$id', '$nama', '$telefon', '$tgl_booking', '$jam_booking', '$durasi_sewa', '$jml_pemain', '$no_lap', '$harga', '$depo', '$keterangan')";
+    $query = "INSERT INTO `futsal` (`nama`, `telefon`, `tgl_booking`, `jam_booking`, `durasi_sewa`, `jml_pemain`, `no_lap`, `harga`, `depo`, `keterangan` )
+        VALUES ('$nama', '$telefon', '$tgl_booking', '$jam_booking', '$durasi_sewa', '$jml_pemain', '$no_lap', '$harga', '$depo', '$keterangan')";
     
     $hasil = mysqli_query($koneksi, $query);
     // Eksekusi query

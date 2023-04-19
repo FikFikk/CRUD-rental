@@ -87,7 +87,7 @@
 				    </div>
 				  </div>
 				  <div align="right">
-				  	<a href="" type="submit" class="btn btn-primary col-sm-10" id="submit" name="submit">Pesan</a>
+				  	<button type="submit" class="btn btn-primary col-sm-10" id="submit" name="submit">Pesan</button>
 				  </div>
         </form>
 	</div>
