@@ -3,7 +3,7 @@
 $host = 'localhost';
 $username = 'root';
 $password = '';
-$database = 'db_futsal';
+$database = 'penyewaan';
 
 $koneksi = mysqli_connect($host, $username, $password, $database);
 
@@ -18,6 +18,7 @@ $koneksi = mysqli_connect($host, $username, $password, $database);
 
 // Fungsi Create
 if (isset($_POST['submit'])) {
+    $id =  $_POST['id'];
     $nama = $_POST['nama'];
     $telefon = $_POST['telefon'];
     $tgl_booking = $_POST['tgl_booking'];
@@ -49,17 +50,54 @@ if (isset($_POST['submit'])) {
     // return true;
 }
 
-// Fungsi Search
-// if(isset($_GET['cari']) && $_GET['cari'] != '') {
-//     $cari = $_GET['cari'];
-//     $query = "SELECT * FROM `futsal` WHERE `id` LIKE '%$cari%' OR `nama` LIKE '%$cari%' OR `telefon` LIKE '%$cari%' OR `tgl_booking` 
-//         LIKE '%$cari%' OR `jam_booking` LIKE '%$cari%' OR `durasi_sewa` LIKE '%$cari%' OR `jml_pemain` 
-//         LIKE '%$cari%' OR `no_lap` LIKE '%$cari%' OR `keterangan` LIKE '%$cari%'";
-// }else{
-//     $query = "SELECT * FROM `futsal`";
+// if(isset($_GET['search'])){
+//   // Filter kata kunci pencarian
+//   $keyword = $_GET['keyword'];
+//   $keyword = preg_replace("#[^0-9a-z]#i","",$keyword);
+
+//   // Buat query pencarian data
+//   $query = "SELECT * FROM futsal WHERE nama LIKE '%$keyword%'";
+
+//   // Eksekusi query
+//   $result = mysqli_query($koneksi, $query);
+
+//   // Tampilkan hasil pencarian
+//   if(mysqli_num_rows($result) > 0){
+//     echo "<table>";
+//     echo "<tr><th>ID</th><th>Nama</th><th>Nomor Telepon</th><th>Tanggal Booking</th><th>Jam Booking</th><th>Durasi Sewa</th><th>Jumlah Pemain</th><th>Nomor Lapangan</th><th>Harga Sewa</th><th>Uang Muka</th><th>Keterangan</th><th>Aksi</th></tr>";
+//     while($row = mysqli_fetch_assoc($result)){
+//       echo "<tr>";
+//       echo "<td>".$row['id']."</td>";
+//       echo "<td>".$row['nama']."</td>";
+//       echo "<td>".$row['telefon']."</td>";
+//       echo "<td>".$row['tgl_booking']."</td>";
+//       echo "<td>".$row['jam_booking']."</td>";
+//       echo "<td>".$row['durasi_sewa']."</td>";
+//       echo "<td>".$row['jml_pemain']."</td>";
+//       echo "<td>".$row['no_lap']."</td>";
+//       echo "<td>".$row['harga']."</td>";
+//       echo "<td>".$row['depo']."</td>";
+//       echo "<td>".$row['keterangan']."</td>";
+//       echo "<td><a href='edit.php?id=".$row['id']."'>Edit</a> | <a href='delete.php?id=".$row['id']."'>Delete</a></td>";
+//       echo "</tr>";
+//     }
+//     echo "</table>";
+//   } else {
+//     echo "Data tidak ditemukan.";
+//   }
 // }
 
-//Fungsi Read
+// Fungsi Search
+
+if(isset($_GET['search']) && $_GET['search'] != '') {
+    $search = $_GET['search'];
+    echo ($_GET['search']);
+    $query = "SELECT * FROM `futsal` WHERE `nama` LIKE '%$search%'";
+}else{
+    $query = "SELECT * FROM `futsal`";
+}
+
+
 $query = "SELECT * FROM futsal";
 $hasil = mysqli_query($koneksi, $query);
 
@@ -91,7 +129,7 @@ if (isset($_POST['update'])) {
     $durasi_sewa = $_POST['durasi_sewa'];
     $jml_pemain = $_POST['jml_pemain'];
     $no_lap = $_POST['no_lap'];
-    $harga = str_replace('.', '', $_POST['harga']);
+    $harga = $_POST['harga'];
     $depo = $_POST['depo'];
     $keterangan = $_POST['keterangan'];
 

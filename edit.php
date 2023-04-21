@@ -62,21 +62,23 @@
                       </select>
                     </div>
                   </div>
+                  <
+                  </div>
                   <div class="form-group row">
                     <label for="durasi_sewa" class="col-sm-2 col-form-label">Durasi Sewa</label>
                     <div class="col-sm-10">
-                      <select class="form-control" name="durasi_sewa" value="<?php echo $data['durasi_sewa']; ?>">
-                      <option>Pilih Durasi Sewa</option>
-                        <option value="1">1 jam</option>
-                        <option value="2">2 jam</option>
-                        <option value="3">3 jam</option>
-                      </select>
+                      <select id="durasi_sewa" class="form-control" name="durasi_sewa" value="<?php echo $data['durasi_sewa']; ?>" onchange="showHarga()" >
+                      <option value="">Pilih Durasi Sewa</option>
+                      <option value="1 Jam">1 jam</option>
+                      <option value="2 Jam">2 jam</option>
+                      <option value="3 Jam">3 jam</option>
+                    </select>
                     </div>
                   </div>
                   <div class="form-group row price">
-                    <label class="col-sm-2 col-form-label">Harga </label>
+                    <label class="col-sm-2 col-form-label">Harga</label>
                     <div class="col-sm-10">
-                        <input type="text" name="harga" class="form-control " value="<?php echo $data['harga']; ?>">
+                        <input type="text" id="harga" name="harga" disabled="" class="form-control " value="<?php echo $data['harga']; ?>">
                     </div>
                   </div>
                   <div class="form-group row">
@@ -86,21 +88,45 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <label for="descrip" class="col-sm-2 col-form-label">Keterangan</label>
+                    <label for="keterangan" class="col-sm-2 col-form-label">Keterangan</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" name="descrip" value="<?php echo $data['descrip']; ?>"></textarea>
+                        <textarea class="form-control" name="keterangan" value="<?php echo $data['keterangan']; ?>"></textarea>
                     </div>
                   </div>
                   <div align="right">
-                    <a href="index.php" type="submit" class="btn btn-primary col-sm-10" name="submit">Pesan</a>
+                    <button type="submit" name="update" class="btn btn-primary col-sm-10 mt-3">Update</button>
                   </div>
                   
-                    <button type="submit" name="update" class="btn btn-primary mt-3">Update</button>
+                    
                 </form>
             </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+      function showHarga() {
+      var durasi_sewa = document.getElementById("durasi_sewa").value;
+      var harga;
+
+      // Set harga sesuai dengan durasi yang dipilih
+      switch(durasi_sewa) {
+        case "1 Jam":
+          harga = 100000;
+          break;
+        case "2 Jam":
+          harga = 200000;
+          break;
+        case "3 Jam":
+          harga = 250000;
+          break;
+        default:
+          harga = "";
+      }
+
+      // Tampilkan harga pada field harga
+      document.getElementById("harga").value = harga;
+    }
+
+    </script>
 </body>
 
 </html>
